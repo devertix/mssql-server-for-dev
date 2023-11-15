@@ -7,12 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
+  docker_publish:
+    runs-on: "ubuntu-20.04"
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: cd 2019 && docker build -t ghcr.io/devertix/mssql-server-for-dev:2019 .
+    - name: Build and publish a Docker image for ${{ github.repository }}
+      with:
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GH_TOKEN }}
+          dockerfile: "./2019/Dockerfile"
+          context: "./2019/"
+          image_tag: "2019"
