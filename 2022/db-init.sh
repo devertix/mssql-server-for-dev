@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "running set up script"
+sleep 10
 
 for i in {1..100};
 do
