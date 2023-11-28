@@ -9,7 +9,7 @@ on:
     - cron: "0 0 * * 1"
 
 jobs:
-  docker_publish:
+  docker_publish_2019:
     runs-on: "ubuntu-20.04"
     steps:
     - uses: actions/checkout@v3
@@ -21,3 +21,15 @@ jobs:
           dockerfile: "./2019/Dockerfile"
           context: "./2019/"
           image_tag: "2019"
+  docker_publish_2022:
+    runs-on: "ubuntu-20.04"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and publish a Docker image for ${{ github.repository }}
+      uses: macbre/push-to-ghcr@master
+      with:
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GH_TOKEN }}
+          dockerfile: "./2022/Dockerfile"
+          context: "./2022/"
+          image_tag: "2022"
